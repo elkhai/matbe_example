@@ -1,0 +1,15 @@
+.login {
+  display: inline-block;
+  margin: 15% auto;
+  padding: 1em;
+  &__input {
+    display: block;
+    margin: 0 1em;  
+  }
+  &__submit {
+    display: block;  
+  }
+  &__submitButton {
+    width: 550px !important;
+  }
+}
