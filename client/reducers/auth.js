@@ -1,10 +1,12 @@
 import { handleActions } from 'redux-actions';
-import Immutable from 'immutable'
 
-const initialState = Immutable.Map({ loggedIn: null });
+const initialState = { loggedIn: null };
 
 export default handleActions({
   'log in': (state, action) => {
-    return state.update('loggedIn', t => action.payload);
+    return Object.assign({}, state, {'loggedIn': action.payload});
+  },
+  'log out': (state, action) => {
+    return Object.assign({}, state, {'loggedIn': null});
   }
 }, initialState);

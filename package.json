@@ -47,6 +47,7 @@
     "material-ui": "^0.14.4",
     "node-sass": "^3.6.0",
     "react-tap-event-plugin": "^1.0.0",
+    "redux-localstorage": "^0.4.0",
     "reqwest": "^2.0.5",
     "sass-loader": "^3.2.0"
   }
