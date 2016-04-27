@@ -11,8 +11,7 @@
 - [x] [SCSS](http://sass-lang.com)
 - [x] [React Router Redux](https://github.com/reactjs/react-router-redux)
 - [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
-- [ ] Redux effects
-- [x] TodoMVC example
+- [x] [Redux effects] (https://github.com/redux-effects/redux-effects)
 
 ## Setup
 
