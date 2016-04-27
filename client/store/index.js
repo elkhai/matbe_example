@@ -1,6 +1,8 @@
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import persistState from 'redux-localstorage'
+import effects from 'redux-effects'
+import fetch, { fetchEncodeJSON } from 'redux-effects-fetch'
 
 import { logger } from '../middleware'
 import rootReducer from '../reducers'
@@ -11,7 +13,10 @@ export default function configure(initialState) {
   )(createStore)
 
   const createStoreWithMiddleware = applyMiddleware(
-    logger
+    logger,
+    effects, 
+    fetch, 
+    fetchEncodeJSON
   )(create)
 
   const store = createStoreWithMiddleware(rootReducer, initialState)

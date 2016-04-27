@@ -1,0 +1,9 @@
+.transaction {
+  display: inline-block;
+  margin: 15% auto;
+  padding: 1em;
+  &__input {
+    display: block;
+    margin: 0em 1em 1em;
+  }
+}
