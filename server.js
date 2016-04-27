@@ -10,7 +10,14 @@ var cookieParser = require('cookie-parser');
 var app = express();
 var compiler = webpack(config);
 
-app.use(bodyParser());
+var inc = 2;
+
+var transactions = [
+  {id:1, amount: 100, bankId: 1}, 
+  {id:2, amount: 200, bankId: 2}
+]
+
+app.use(bodyParser.json())
 app.use(cookieParser());
 
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -33,6 +40,29 @@ app.post('/auth/login', function(req, res) {
   } else {
     res.sendStatus(401);
   }
+});
+
+app.get('/banks', function(req, res) {
+  res.send([1, 2, 3, 4, 5]);
+});
+
+app.get('/transaction', function(req, res) {
+  transactions.push({
+    id: ++inc,
+    amount: req.query.amount,
+    bankId: req.query.bankId
+  })
+  res.sendStatus(200);
+});
+
+app.get('/delete_transaction', function(req, res) {
+  transactions.splice(parseInt(req.query.count), 1);
+  res.sendStatus(200);
+});
+
+
+app.get('/transactions', function(req, res) {
+  res.send(transactions);
 });
 
 app.listen(3000, function (err) {

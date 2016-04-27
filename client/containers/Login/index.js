@@ -34,9 +34,9 @@ class Login extends Component {
       });
       if (response) {
         authActions.logIn(true);
+        history.push('/main');
+        routerActions.push('/main');
       }
-      history.push('/main');
-      routerActions.push('/main');
     } catch(e) {
       console.error(e);
     }
