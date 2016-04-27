@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 const initialState = {count: 2, data: []};
 
 export default handleActions({
-  'add': (state, action) => {
+  'add transaction': (state, action) => {
     let newCount = state.count++;
     return Object.assign(
       state, 

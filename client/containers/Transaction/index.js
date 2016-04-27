@@ -22,43 +22,32 @@ class Transaction extends Component {
   constructor(context, props) {
     super(context, props);
     this.state = {
-      form: {
-        amount: 0,
-        bankId: null
-      },      
-      banks: []
+      amount: 0,
+      bankId: null
     }
-    this.getBanksList();
+    
   }
 
   handleInputChange (evt) {
     this.setState({
-      form: Object.assign(this.state.form, {[evt.target.name]: evt.target.value})
+     [evt.target.name]: evt.target.value
     })
   }
 
   bankChange(event, index, value) {
-    this.setState({ form: Object.assign(this.state.form, {bankId: value}) });
-  }
-
-  async getBanksList() {
-    try {
-      let response = await fetch(BANKS);
-      let banks = await response.json();
-      banks.map(b => this.setState({banks: [<MenuItem value={b} key={b} primaryText={getBankName(b)}/>, ...this.state.banks]}))
-    } catch(e) {
-
-    }
+    this.setState({ bankId: value });
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.transactionsActions.addTransaction(this.state.form);
+    this.props.transactionsActions.addTransaction(this.state);
   }
 
   render() {
 
-    const { transactionsActions, children } = this.props
+    const { banks } = this.props
+    let banksMenu = []
+    banks.map((bank, i) => banksMenu.push(<MenuItem value={++i} key={i} primaryText={bank}/>))
     return (
        <Paper className="transaction">
         <form
@@ -72,10 +61,10 @@ class Transaction extends Component {
           <div className="transaction__input">
             <SelectField 
             floatingLabelText="Банк"
-            value={this.state.form.bankId}
+            value={this.state.bankId}
             name="bankId"
             onChange={::this.bankChange}>
-              {this.state.banks}
+              {banksMenu}
             </SelectField>
           </div>
           <div className="transaction__input">
@@ -92,6 +81,7 @@ class Transaction extends Component {
 
 function mapStateToProps(state) {
   return {
+    banks: state.banks
   }
 }
 

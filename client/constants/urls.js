@@ -1,4 +1,5 @@
-const BASE = 'http://localhost:3000'
+let env = process.env.NODE_ENV === 'production';
+const BASE = env ? 'http://localhost:3000' : '';
 export const LOGIN = `${BASE}/auth/login`
 export const BANKS = `${BASE}/banks`
 export const TRANSACTION = `${BASE}/transaction`

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as auth from '../../actions/auth'
 import * as transactions from '../../actions/transactions'
+import * as banks from '../../actions/banks'
 import { routerActions } from 'react-router-redux'
 
 import { NavigationMoreVert, NavigationArrowBack } from 'material-ui/lib/svg-icons'
@@ -22,6 +23,7 @@ class Main extends Component {
       navOpen: false
     };
     this.props.transactionsActions.loadTransactions();
+    this.props.banksActions.getBanksList();
   }
 
   toggleNav() {
@@ -30,7 +32,7 @@ class Main extends Component {
 
   logOut() {
     const { authActions, routerActions, history } = this.props;
-    authActions.logOut();
+    authActions.removeToken();
     history.push('/login');
     routerActions.push('/login');
   }
@@ -39,12 +41,14 @@ class Main extends Component {
     const { history } = this.props;
     history.push('/main/transaction');
     routerActions.push('/main/transaction');
+    this.toggleNav();
   }
 
   toTransactions() {
     const { history } = this.props;
     history.push('/main/transactions');
     routerActions.push('/main/transactions');
+    this.toggleNav();
   }
 
   render() {
@@ -88,7 +92,8 @@ function mapDispatchToProps(dispatch) {
   return {
     authActions: bindActionCreators(auth, dispatch),
     routerActions: bindActionCreators(routerActions, dispatch),
-    transactionsActions: bindActionCreators(transactions, dispatch)
+    transactionsActions: bindActionCreators(transactions, dispatch),
+    banksActions: bindActionCreators(banks, dispatch)
   }
 }
 

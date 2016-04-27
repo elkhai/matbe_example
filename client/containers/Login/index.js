@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import reqwest from 'reqwest'
 import * as auth from '../../actions/auth'
-import { LOGIN } from '../../constants/urls'
 import { routerActions } from 'react-router-redux'
 
 import { Paper, TextField, RaisedButton } from 'material-ui'
@@ -22,24 +20,10 @@ class Login extends Component {
     })
   }
 
-  async handleSubmit (evt) {
-    try {
-      evt.preventDefault()
-      console.log(this.props);
-      const { authActions, history, routerActions } = this.props
-      let response = await reqwest({
-        url: LOGIN,
-        method: 'POST',
-        data: this.state
-      });
-      if (response) {
-        authActions.logIn(true);
-        history.push('/main');
-        routerActions.push('/main');
-      }
-    } catch(e) {
-      console.error(e);
-    }
+  handleSubmit (evt) {
+    evt.preventDefault();
+    const { authActions, history, routerActions } = this.props;      
+    authActions.doLogIn(this.state, history, routerActions);     
   }
 
   render() {
