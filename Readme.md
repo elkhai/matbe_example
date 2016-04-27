@@ -23,11 +23,15 @@ $ npm install
 ## Running
 
 ```
-$ npm run start_dev
+$ npm run start
 ```
 
 ## Build
 
 ```
 $ npm run build
+```
+after build you can run example server
+```
+node server
 ```
